@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="on_boarding_sign_in">Sign In</string>
+    <string name="on_boarding_log_in">Log In</string>
+</resources>

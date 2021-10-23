@@ -6,17 +6,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.navigation.fragment.findNavController
 import com.ozu.cs394.cryptocoins.R
+import com.ozu.cs394.cryptocoins.databinding.LoginFragmentBinding
 
 class LoginFragment : Fragment() {
+    private var _binding: LoginFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: LoginViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+            findNavController().navigate(R.id.action_loginFragment_to_onBoardingFragment)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.login_fragment, container, false)
+    ): View {
+        _binding = LoginFragmentBinding.inflate(inflater,container,false)
+        return (binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,4 +39,10 @@ class LoginFragment : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }
+
