@@ -18,10 +18,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    buildTypes{
+        debug {
+            buildConfigField "String", "API_URL", "\"api.coingecko.com/api/v3/\""
+            buildConfigField "String", "API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", "\"https://api.nomics.com/v1\""
+            buildConfigField "String", "API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
         }
     }
     compileOptions {
