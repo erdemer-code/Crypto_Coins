@@ -1,6 +1,7 @@
-package com.ozu.cs394.cryptocoins.model
+package com.ozu.cs394.cryptocoins.network
 
 import com.ozu.cs394.cryptocoins.BuildConfig
+import com.ozu.cs394.cryptocoins.network.service.CurrentCoinsPriceService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,6 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class NetworkHelper {
+
+    var currentCoinsPriceService: CurrentCoinsPriceService? = null
 
     init {
         val retrofit = Retrofit.Builder()
@@ -18,6 +21,7 @@ class NetworkHelper {
 
         // TODO: Add related network services here!
 
+        currentCoinsPriceService = retrofit.create(CurrentCoinsPriceService::class.java)
     }
 
     private fun getClient(): OkHttpClient {

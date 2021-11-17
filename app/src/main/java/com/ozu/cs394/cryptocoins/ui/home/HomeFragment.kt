@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ozu.cs394.cryptocoins.BuildConfig
 import com.ozu.cs394.cryptocoins.R
 
 class HomeFragment : Fragment() {
@@ -22,6 +23,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        viewModel.getCurrentCoinsPrice(
+            BuildConfig.API_KEY,
+            listOf<String>(
+                "BTH", "ETH",
+                "DOGE"
+            ), "USD"
+        )
 
     }
 
