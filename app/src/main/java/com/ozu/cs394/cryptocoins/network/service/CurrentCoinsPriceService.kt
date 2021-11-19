@@ -9,7 +9,7 @@ interface CurrentCoinsPriceService {
    @GET("currencies/ticker")
    suspend fun getCurrentCoinPrice(
        @Query("key") apiKey:String,
-       @Query("ids") coinsList: List<String>,
+       @Query("ids") coinsList: String,
        @Query("convert") convertedPrice: String
    ): Response<List<CoinResponseModel>>
 

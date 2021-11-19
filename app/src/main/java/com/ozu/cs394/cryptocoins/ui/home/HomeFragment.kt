@@ -2,6 +2,7 @@ package com.ozu.cs394.cryptocoins.ui.home
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +28,27 @@ class HomeFragment : Fragment() {
         viewModel.getCurrentCoinsPrice(
             BuildConfig.API_KEY,
             listOf<String>(
-                "BTH", "ETH",
+                "BTC", "ETH",
                 "DOGE"
             ), "USD"
         )
 
+        initObserver()
+
+    }
+
+    private fun initObserver() {
+        viewModel.currentCoinsPriceLiveData.observe(viewLifecycleOwner){
+            it.forEach { coinResponse ->
+                Log.e("Coin_Id",coinResponse.id.toString())
+                Log.e("Coin_Name",coinResponse.name.toString())
+                Log.e("Coin_Price",coinResponse.price.toString())
+                Log.e("Coin_Symbol",coinResponse.symbol.toString())
+                Log.e("Coin_PriceDate",coinResponse.convertedPriceDate.toString())
+                Log.e("Coin_Logo",coinResponse.logo_url!!)
+
+            }
+        }
     }
 
 }

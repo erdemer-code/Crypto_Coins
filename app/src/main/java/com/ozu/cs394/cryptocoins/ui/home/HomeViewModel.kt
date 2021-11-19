@@ -1,5 +1,6 @@
 package com.ozu.cs394.cryptocoins.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,7 +21,7 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO){
-                    networkHelper.currentCoinsPriceService?.getCurrentCoinPrice(apiKey, coinsList, convertedPrice)
+                    networkHelper.currentCoinsPriceService?.getCurrentCoinPrice(apiKey, convertListToString(coinsList), convertedPrice)
                 }
                 if (response!!.isSuccessful)
                     _currentCoinsPriceLiveData.value = response.body()
@@ -29,5 +30,13 @@ class HomeViewModel : ViewModel() {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun convertListToString(list: List<String>):String{
+        var str = ""
+        list.forEach {
+            str += "${it},"
+        }
+        return str
     }
 }
