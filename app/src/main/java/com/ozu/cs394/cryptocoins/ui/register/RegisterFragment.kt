@@ -1,6 +1,7 @@
 package com.ozu.cs394.cryptocoins.ui.register
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.textView2.movementMethod = LinkMovementMethod.getInstance();
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
 
