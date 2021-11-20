@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 class HomeViewModel : ViewModel() {
     private val _currentCoinsPriceLiveData = MutableLiveData<List<CoinResponseModel>>()
     private val networkHelper = NetworkHelper()
+
     val currentCoinsPriceLiveData: LiveData<List<CoinResponseModel>> = _currentCoinsPriceLiveData
 
 
