@@ -23,7 +23,9 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.597948717948718" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.597948717948718" />
         <entry key="app/src/main/res/drawable/splash_screen_drawable.xml" value="0.597948717948718" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.315625" />
         <entry key="app/src/main/res/layout/card_layout.xml" value="0.4782608695652174" />
+        <entry key="app/src/main/res/layout/coin_detail_fragment.xml" value="0.315625" />
         <entry key="app/src/main/res/layout/fragment_on_boarding.xml" value="0.4782608695652174" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.315625" />
       </map>

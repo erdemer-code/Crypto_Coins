@@ -4,11 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    android:layout_margin="5dp"
-    app:cardBackgroundColor="#81C784"
-    app:cardCornerRadius="12dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="@color/purple_bg"
+    app:cardCornerRadius="30dp"
     app:cardElevation="3dp"
     app:contentPadding="4dp"
     >
@@ -17,32 +21,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout"
-        android:padding="16dp"
+        android:padding="12dp"
         tools:ignore="ExtraText">
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:contentDescription="TODO" />
+
         <TextView
             android:id="@+id/item_title"
-            android:layout_width="236dp"
-            android:layout_height="39dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/item_image"
-            android:layout_marginStart="16dp"
-            android:textSize="30sp"/>
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_image" />
 
 
         <TextView
-            android:id="@+id/item_detail"
-            android:layout_width="236dp"
-            android:layout_height="16dp"
+            android:id="@+id/item_short_title"
+            android:textColor="#3A3B3C"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
             app:layout_constraintTop_toBottomOf="@id/item_title"
-            app:layout_constraintLeft_toRightOf="@+id/item_image"
-            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toLeftOf="@+id/item_image"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/item_price"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="end"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_image" />
+
+        <TextView
+            android:id="@+id/item_daily_change"
+            android:textColor="#00FF00"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="end"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@id/item_title"
+            app:layout_constraintRight_toRightOf="@+id/item_price"
             android:layout_marginTop="8dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
