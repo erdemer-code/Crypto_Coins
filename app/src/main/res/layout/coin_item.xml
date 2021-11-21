@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <variable
+        name="coinData"
+        type="com.ozu.cs394.cryptocoins.model.response.CoinResponseModel" />
+</data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/card_view"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/purple_bg"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="3dp"
+        app:contentPadding="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            tools:ignore="ExtraText">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:showImage="@{coinData.logo_url}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:text="@{coinData.symbol}"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_image" />
+
+
+            <TextView
+                android:id="@+id/item_short_title"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="#3A3B3C"
+                android:text="@{coinData.name}"
+                app:layout_constraintLeft_toLeftOf="@+id/item_image"
+                app:layout_constraintTop_toBottomOf="@id/item_title" />
+
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="end"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="@{coinData.roundedPrice.concat(@string/currency_text)}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_image" />
+
+            <TextView
+                android:id="@+id/item_daily_change"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="end"
+                android:checkTheSign="@{coinData.day1.formattedPriceChange}"
+                android:text="@{coinData.day1.formattedPriceChange.concat(@string/percent_text)}"
+                app:layout_constraintRight_toRightOf="@+id/item_price"
+                app:layout_constraintTop_toBottomOf="@id/item_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

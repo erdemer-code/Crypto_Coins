@@ -27,6 +27,7 @@ class CoinDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CoinDetailViewModel::class.java)
 
+
     }
 
 }

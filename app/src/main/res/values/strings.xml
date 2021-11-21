@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="on_boarding_sign_in">Sign In</string>
     <string name="on_boarding_log_in">Log In</string>
+    <string name="chkBox_KVKK" > <a href = "https://www.kvkk.gov.tr/Icerik/6649/Personal-Data-Protection-Law"> <u>
+        Please Read The Terms &amp; Conditions </u> </a> </string>
+    <string name="currency_text">&#160;USD</string>
+    <string name="percent_text">&#160;%</string>
 </resources>

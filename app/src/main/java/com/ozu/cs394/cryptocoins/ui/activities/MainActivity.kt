@@ -5,11 +5,14 @@ import android.os.Bundle
 import com.ozu.cs394.cryptocoins.R
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_CryptoCoins)
         supportFragmentManager.findFragmentById(R.id.nav_graph)
         setContentView(R.layout.activity_main)
+
     }
 
     override fun onBackPressed() {
