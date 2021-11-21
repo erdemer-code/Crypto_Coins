@@ -36,4 +36,7 @@ data class CoinResponseModel(
             val date = LocalDate.parse(price_date, inputFormatter)
             return outputFormatter.format(date)
         }
+    val roundedPrice: String
+    get() = String.format("%.2f",price?.toDouble())
+
 }
