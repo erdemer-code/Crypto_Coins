@@ -21,8 +21,8 @@
         android:id="@+id/recyclerViewHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:visibility="invisible"
@@ -40,6 +40,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:title="@string/app_name"
+        app:titleTextAppearance="@style/MontserratBoldTextAppearance"
         app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
 

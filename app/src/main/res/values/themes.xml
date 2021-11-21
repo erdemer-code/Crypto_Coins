@@ -18,4 +18,9 @@
         <item name="android:windowBackground">@drawable/splash_screen_drawable</item>
         <item name="android:statusBarColor">@color/splash_color_bg</item>
     </style>
+
+    <style name="MontserratBoldTextAppearance">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>
