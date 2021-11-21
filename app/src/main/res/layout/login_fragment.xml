@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/etEmail"
                 android:layout_width="280dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="50dp"
@@ -66,8 +66,8 @@
                 android:drawablePadding="10dp"
                 android:elevation="5dp"
                 android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName"
+                android:hint="E-Mail"
+                android:inputType="textEmailAddress"
                 android:minHeight="48dp"
                 android:paddingStart="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/etPassword"
                 android:layout_width="280dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
@@ -87,9 +87,9 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingStart="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintEnd_toEndOf="@+id/etEmail"
+                app:layout_constraintStart_toStartOf="@+id/etEmail"
+                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLoginScreen"
@@ -100,9 +100,9 @@
                 android:elevation="5dp"
                 android:text="Log In"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
+                app:layout_constraintEnd_toEndOf="@+id/etPassword"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
+                app:layout_constraintStart_toStartOf="@+id/etPassword"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <TextView
@@ -114,8 +114,8 @@
 
                 android:textColor="#640eb1"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+                app:layout_constraintEnd_toEndOf="@+id/etPassword"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -133,7 +133,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/twCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"

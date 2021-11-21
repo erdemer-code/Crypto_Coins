@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.ozu.cs394.cryptocoins.BuildConfig
 import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.LoginFragmentBinding
 
@@ -17,6 +17,11 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: LoginViewModel
+
+    companion object {
+        const val EMAIL = "test@ozu.edu.tr"
+        const val PASSWORD = "123456"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +44,22 @@ class LoginFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding.btnLoginScreen.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            validateLogin()
+        }
+        binding.twCreateAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
+    }
+
+    private fun validateLogin() {
+        if(binding.etEmail.text.toString() == EMAIL && binding.etPassword.text.toString() == PASSWORD) {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        } else {
+
+            Toast.makeText(requireContext(),"Your email address or password is incorrect.",Toast.LENGTH_SHORT).show()
+            binding.etPassword.setText("")
+        }
     }
 
     override fun onDestroy() {
