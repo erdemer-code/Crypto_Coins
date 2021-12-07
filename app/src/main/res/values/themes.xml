@@ -12,11 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fillViewport">true</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen_drawable</item>
         <item name="android:statusBarColor">@color/splash_color_bg</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="MontserratBoldTextAppearance">

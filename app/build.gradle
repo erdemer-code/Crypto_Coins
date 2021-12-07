@@ -43,6 +43,7 @@ android {
     }
 }
 
+def lottieVersion = "3.4.0"
 
 
 dependencies {
@@ -85,4 +86,7 @@ dependencies {
     //Coil
     implementation("io.coil-kt:coil:1.2.0")
     implementation("io.coil-kt:coil-svg:1.2.0")
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

@@ -42,8 +42,8 @@ class HomeFragment : Fragment() {
             BuildConfig.API_KEY,
             listOf<String>(
                 "BTC", "ETH","BNB","SOL","ADA","XRP","AVAX",
-                "DOGE","SHIB","LTC","MATIC","XLM","EGLD","TRX","FTM",
-                "MANA","FIL","ATOM","ALGO","XTZ"
+                "DOGE","LTC","MATIC","XLM","EGLD","TRX","FTM",
+                "MANA","FIL","ATOM","ALGO","XTZ","UNI", "LINK"
             ), "USD"
         )
 

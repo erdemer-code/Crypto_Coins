@@ -17,14 +17,14 @@ data class CoinResponseModel(
     val price: String?,
     val price_date: String?,
     @SerializedName("1d")
-    val day1: IntervalModel,
+    val day1: IntervalModel?,
     @SerializedName("7d")
-    val day7: IntervalModel,
+    val day7: IntervalModel?,
     @SerializedName("30")
-    val day30: IntervalModel,
+    val day30: IntervalModel?,
     @SerializedName("365d")
-    val day365: IntervalModel,
-    val ytd: IntervalModel
+    val day365: IntervalModel?,
+    val ytd: IntervalModel?
 
 ) {
     val convertedPriceDate: String?
@@ -32,7 +32,7 @@ data class CoinResponseModel(
         get() {
             val inputFormatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-            val outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.getDefault())
+            val outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.getDefault())
             val date = LocalDate.parse(price_date, inputFormatter)
             return outputFormatter.format(date)
         }

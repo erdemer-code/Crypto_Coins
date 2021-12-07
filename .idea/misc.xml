@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/drawable/dark_yellow_btn_bg.xml" value="0.3141025641025641" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/drawable/light_yellow_btn_bg.xml" value="0.3141025641025641" />
+        <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/drawable/login_register_bg.xml" value="0.3141025641025641" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/drawable/splash_screen_drawable.xml" value="0.3141025641025641" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/drawable/yellow_btn_selector.xml" value="0.3141025641025641" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
@@ -15,7 +16,7 @@
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/fragment_on_boarding.xml" value="0.33" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/fragment_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/home_fragment.xml" value="0.36666666666666664" />
-        <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/login_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/login_fragment.xml" value="0.3503184713375796" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/profile_fragment.xml" value="0.30085470085470084" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/layout/register_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/CS394_Project/CryptoCoins/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18162393162393162" />
