@@ -54,11 +54,17 @@
         tools:layout="@layout/home_fragment" >
         <action
             android:id="@+id/action_homeFragment_to_coinDetailFragment"
-            app:destination="@id/coinDetailFragment" />
+            app:destination="@id/coinDetailFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/coinDetailFragment"
         android:name="com.ozu.cs394.cryptocoins.ui.coin_detail.CoinDetailFragment"
         android:label="coin_detail_fragment"
-        tools:layout="@layout/coin_detail_fragment" />
+        tools:layout="@layout/coin_detail_fragment" >
+        <argument
+            android:name="symbol"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

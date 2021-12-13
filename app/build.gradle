@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -20,14 +21,18 @@ android {
 
     buildTypes{
         debug {
-            buildConfigField "String", "API_URL", "\"https://api.nomics.com/v1/\""
-            buildConfigField "String", "API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "NOMICS_API_URL", "\"https://api.nomics.com/v1/\""
+            buildConfigField "String", "NOMICS_API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "LUNARCRUSH_API_URL", "\"https://api.lunarcrush.com/\""
+            buildConfigField "String", "LUNARCRUSH_API_KEY", "\"v4br0b7o4f7ff3r83l8gs\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_URL", "\"https://api.nomics.com/v1/\""
-            buildConfigField "String", "API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "NOMICS_API_URL", "\"https://api.nomics.com/v1/\""
+            buildConfigField "String", "NOMICS_API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "LUNARCRUSH_API_URL", "\"https://api.lunarcrush.com/v2/\""
+            buildConfigField "String", "LUNARCRUSH_API_KEY", "\"v4br0b7o4f7ff3r83l8gs\""
         }
     }
     compileOptions {
@@ -48,10 +53,10 @@ def lottieVersion = "3.4.0"
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -89,4 +94,7 @@ dependencies {
 
     //Lottie
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //MP Android Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

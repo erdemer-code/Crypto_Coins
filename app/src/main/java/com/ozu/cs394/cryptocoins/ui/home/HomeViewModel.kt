@@ -1,18 +1,17 @@
 package com.ozu.cs394.cryptocoins.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ozu.cs394.cryptocoins.model.response.CoinResponseModel
-import com.ozu.cs394.cryptocoins.network.NetworkHelper
+import com.ozu.cs394.cryptocoins.network.HomePageNetworkHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
-    private val networkHelper = NetworkHelper()
+    private val networkHelper = HomePageNetworkHelper()
 
     private val _currentCoinsPriceLiveData = MutableLiveData<List<CoinResponseModel>>()
     val currentCoinsPriceLiveData: LiveData<List<CoinResponseModel>> = _currentCoinsPriceLiveData
@@ -27,7 +26,7 @@ class HomeViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO){
                     networkHelper.currentCoinsPriceService?.getCurrentCoinPrice(apiKey, convertListToString(coinsList), convertedPrice)
                 }
-                if (response!!.isSuccessful) {
+                if (response?.isSuccessful == true) {
                     _currentCoinsPriceLiveData.value = response.body()
                     _homeLoadingLiveData.value = true
                 } else {

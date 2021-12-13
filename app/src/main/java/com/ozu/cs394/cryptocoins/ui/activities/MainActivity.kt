@@ -2,6 +2,7 @@ package com.ozu.cs394.cryptocoins.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
 import com.ozu.cs394.cryptocoins.R
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +16,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
+
 }
