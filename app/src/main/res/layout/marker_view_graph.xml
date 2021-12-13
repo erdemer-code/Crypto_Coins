@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/purple_btn_bg">
+    android:background="@drawable/light_yellow_btn_bg">
 
 
     <TextView
@@ -14,10 +14,11 @@
         android:gravity="center"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
+        android:textStyle="bold"
         android:paddingBottom="10dp"
         android:paddingTop="8dp"
         android:textColor="@color/white"
-        android:textSize="11sp"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Price: $5000" />

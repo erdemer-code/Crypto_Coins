@@ -30,6 +30,10 @@ import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.CoinDetailFragmentBinding
 import com.github.mikephil.charting.utils.MPPointF
 import android.graphics.Canvas
+import com.github.mikephil.charting.components.IMarker
+import com.ozu.cs394.cryptocoins.extension.checkValuePositiveOrNegative
+import com.ozu.cs394.cryptocoins.extension.downloadFromUrl
+import com.ozu.cs394.cryptocoins.extension.putCorrectArrow
 
 class CoinDetailFragment : Fragment() {
 
@@ -54,16 +58,29 @@ class CoinDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[CoinDetailViewModel::class.java]
-        Log.e("DetailArgs", args.symbol ?: "")
+
         viewModel.getCoinDetailPrices(
             "assets",
             BuildConfig.LUNARCRUSH_API_KEY,
-            args.symbol ?: "",
+            args.coin?.symbol ?: "",
             "30",
             "day"
         )
         initObserver()
+        initViewSetup()
 
+
+    }
+
+    private fun initViewSetup() {
+        binding.apply {
+            ivCoinDetail.downloadFromUrl(args.coin?.logo_url)
+            tvCoinDetailName.text = args.coin?.name
+            tvCoinDetailSymbol.text = args.coin?.symbol
+            tvCoinDetailPrice.text = "$ ${args.coin?.roundedPrice}"
+            tvCoinDetailChangeValue.checkValuePositiveOrNegative(args.coin?.day1?.formattedPriceChange!!)
+            ivCoinDetailValueArrow.putCorrectArrow(args.coin?.day1?.formattedPriceChange!!)
+        }
 
     }
 
@@ -87,9 +104,9 @@ class CoinDetailFragment : Fragment() {
     }
 
     private fun setLineChart() {
-        val dataSet = LineDataSet(priceTimeSeries, "Price").apply {
-            this.color = Color.BLACK
-            this.valueTextColor = Color.BLACK
+        val dataSet = LineDataSet(priceTimeSeries, "").apply {
+            this.color = Color.WHITE
+            this.valueTextColor = Color.WHITE
             this.valueTextSize = 10f
             this.setDrawValues(false)
             this.setDrawFilled(true)
@@ -118,11 +135,13 @@ class CoinDetailFragment : Fragment() {
             xAxis.labelRotationAngle = 90f
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.textSize = 12f
+            xAxis.textColor = Color.WHITE
             description.isEnabled = false
             axisRight.isEnabled = false
             axisLeft.valueFormatter = YaxisFormatter()
-            isDoubleTapToZoomEnabled = true
-            setTouchEnabled(true)
+            axisLeft.textColor = Color.WHITE
+            legend.isEnabled = false
+
         }
     }
 
@@ -153,16 +172,18 @@ class CoinDetailFragment : Fragment() {
     inner class CustomMarkerView(context: Context?, layoutResource: Int) : MarkerView(
         context,
         layoutResource
-    ) {
-        private var tvContent: TextView? =
-            findViewById(R.id.tvMarkerContent)
+    ),IMarker {
+        private var tvContent: TextView? = null
         private var mOffset: MPPointF? = null
         private val uiScreenWidth = resources.displayMetrics.widthPixels
 
+        init {
+            tvContent =  findViewById(R.id.tvMarkerContent)
+        }
 
         override fun refreshContent(e: Entry, highlight: Highlight?) {
-            super.refreshContent(e, highlight);
             tvContent?.text = "Price: $ "+ String.format("%.2f", e.y) +"\nTime: ${timeList[e.x.toInt()]}"
+            super.refreshContent(e, highlight);
         }
 
         override fun getOffset(): MPPointF? {

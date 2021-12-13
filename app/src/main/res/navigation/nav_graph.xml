@@ -63,8 +63,8 @@
         android:label="coin_detail_fragment"
         tools:layout="@layout/coin_detail_fragment" >
         <argument
-            android:name="symbol"
-            app:argType="string"
+            android:name="coin"
+            app:argType="com.ozu.cs394.cryptocoins.model.response.CoinResponseModel"
             app:nullable="true" />
     </fragment>
 </navigation>

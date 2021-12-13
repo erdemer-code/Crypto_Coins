@@ -1,13 +1,15 @@
 package com.ozu.cs394.cryptocoins.model.response
 
 import android.os.Build
+import android.os.Parcelable
 import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-
+@Parcelize
 data class CoinResponseModel(
     val id: String?,
     val currency: String?,
@@ -26,7 +28,7 @@ data class CoinResponseModel(
     val day365: IntervalModel?,
     val ytd: IntervalModel?
 
-) {
+):Parcelable {
     val convertedPriceDate: String?
         @RequiresApi(Build.VERSION_CODES.O)
         get() {
@@ -37,6 +39,6 @@ data class CoinResponseModel(
             return outputFormatter.format(date)
         }
     val roundedPrice: String
-    get() = String.format("%.2f",price?.toDouble())
+    get() = String.format("%.2f",price?.toDouble(),Locale.ENGLISH)
 
 }

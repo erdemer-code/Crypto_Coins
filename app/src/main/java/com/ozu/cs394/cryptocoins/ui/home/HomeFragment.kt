@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
 
         adapter = CoinsAdapter(coinList, object : OnCoinClickListener {
             override fun onClick(position: Int) {
-                val bundle = bundleOf("symbol" to coinList[position].symbol)
+                val bundle = bundleOf("coin" to coinList[position])
                 findNavController().navigate(R.id.action_homeFragment_to_coinDetailFragment, bundle)
             }
 
