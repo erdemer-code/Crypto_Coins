@@ -1,20 +1,25 @@
 package com.ozu.cs394.cryptocoins.ui.coin_detail
 
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.IMarker
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -23,17 +28,14 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.MPPointF
 import com.ozu.cs394.cryptocoins.BuildConfig
 import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.CoinDetailFragmentBinding
-import com.github.mikephil.charting.utils.MPPointF
-import android.graphics.Canvas
-import com.github.mikephil.charting.components.IMarker
 import com.ozu.cs394.cryptocoins.extension.checkValuePositiveOrNegative
 import com.ozu.cs394.cryptocoins.extension.downloadFromUrl
 import com.ozu.cs394.cryptocoins.extension.putCorrectArrow
+
 
 class CoinDetailFragment : Fragment() {
 
@@ -43,6 +45,7 @@ class CoinDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val priceTimeSeries = mutableListOf<Entry>()
     val timeList = mutableListOf<String>()
+    private var isFavorite = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,8 +103,30 @@ class CoinDetailFragment : Fragment() {
             }
 
             setLineChart()
+
+            binding.ivFavoriteStar.setOnClickListener {
+                if (!isFavorite) {
+                    isFavorite = true
+                    DrawableCompat.setTint(
+                        DrawableCompat.wrap(binding.ivFavoriteStar.drawable),
+                        ContextCompat.getColor(requireContext(), R.color.light_yellow)
+                    )
+                    // TODO: Room operations
+                    Toast.makeText(requireContext(),"Coin was added to the Favorites",Toast.LENGTH_SHORT).show()
+                } else {
+                    isFavorite = false
+                    DrawableCompat.setTint(
+                        DrawableCompat.wrap(binding.ivFavoriteStar.drawable),
+                        ContextCompat.getColor(requireContext(), R.color.white)
+                    )
+                    // TODO: Room operations
+                    Toast.makeText(requireContext(),"Coin was removed from the Favorites",Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
+
 
     private fun setLineChart() {
         val dataSet = LineDataSet(priceTimeSeries, "").apply {
@@ -172,17 +197,18 @@ class CoinDetailFragment : Fragment() {
     inner class CustomMarkerView(context: Context?, layoutResource: Int) : MarkerView(
         context,
         layoutResource
-    ),IMarker {
+    ), IMarker {
         private var tvContent: TextView? = null
         private var mOffset: MPPointF? = null
         private val uiScreenWidth = resources.displayMetrics.widthPixels
 
         init {
-            tvContent =  findViewById(R.id.tvMarkerContent)
+            tvContent = findViewById(R.id.tvMarkerContent)
         }
 
         override fun refreshContent(e: Entry, highlight: Highlight?) {
-            tvContent?.text = "Price: $ "+ String.format("%.2f", e.y) +"\nTime: ${timeList[e.x.toInt()]}"
+            tvContent?.text =
+                "Price: $ " + String.format("%.2f", e.y) + "\nTime: ${timeList[e.x.toInt()]}"
             super.refreshContent(e, highlight);
         }
 

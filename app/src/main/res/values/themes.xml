@@ -19,9 +19,11 @@
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen_drawable</item>
         <item name="android:statusBarColor">@color/splash_color_bg</item>
-        <item name="android:fillViewport">true</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_bg</item>
+        <item name="colorAccent">@color/teal_200</item>
     </style>
 
     <style name="MontserratBoldTextAppearance">
