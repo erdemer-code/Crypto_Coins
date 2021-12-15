@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Bitcoin"
-            android:textColor="@color/subtitle_gray"
+            android:textColor="@color/orange"
             android:fontFamily="@font/montserrat_bold"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
@@ -106,6 +106,53 @@
             app:layout_constraintTop_toTopOf="@id/tvCoinDetailChangeValue"
             android:layout_marginEnd="8dp" />
 
+        <RadioGroup
+            android:id="@+id/rgTimeLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvCoinDetailName"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1 Day"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@drawable/radio_btn_text_selector"
+                android:background="@drawable/btn_select_time_interval_left"/>
+            <RadioButton
+                android:id="@+id/rb1Week"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1 Week"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@drawable/radio_btn_text_selector"
+                android:background="@drawable/btn_select_time_interval_middle"/>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1 Month"
+                android:button="@android:color/transparent"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textColor="@drawable/radio_btn_text_selector"
+                android:background="@drawable/btn_select_time_interval_right"/>
+
+        </RadioGroup>
+
+
 
 
         <com.github.mikephil.charting.charts.LineChart
@@ -113,9 +160,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:paddingEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

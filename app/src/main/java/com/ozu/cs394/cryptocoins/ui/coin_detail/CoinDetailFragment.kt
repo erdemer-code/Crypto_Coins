@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -66,13 +67,54 @@ class CoinDetailFragment : Fragment() {
             "assets",
             BuildConfig.LUNARCRUSH_API_KEY,
             args.coin?.symbol ?: "",
-            "30",
+            "7",
             "day"
         )
         initObserver()
         initViewSetup()
 
+        binding.rb1Week.isChecked = true
 
+        binding.rgTimeLine.setOnCheckedChangeListener { radioGroup, i ->
+            val selectedRadioButton = radioGroup.findViewById<RadioButton>(i)
+            when (selectedRadioButton.text){
+                "1 Day" -> {dayState()}
+                "1 Week" -> {weekState()}
+                "1 Month" -> {monthState()}
+            }
+        }
+
+
+    }
+
+    private fun monthState() {
+        viewModel.getCoinDetailPrices(
+            "assets",
+            BuildConfig.LUNARCRUSH_API_KEY,
+            args.coin?.symbol ?: "",
+            "30",
+            "day"
+        )
+    }
+
+    private fun weekState() {
+        viewModel.getCoinDetailPrices(
+            "assets",
+            BuildConfig.LUNARCRUSH_API_KEY,
+            args.coin?.symbol ?: "",
+            "7",
+            "day"
+        )
+    }
+
+    private fun dayState() {
+        viewModel.getCoinDetailPrices(
+            "assets",
+            BuildConfig.LUNARCRUSH_API_KEY,
+            args.coin?.symbol ?: "",
+            "24",
+            "hour"
+        )
     }
 
     private fun initViewSetup() {
@@ -97,6 +139,8 @@ class CoinDetailFragment : Fragment() {
 
 
         viewModel.coinDetailPriceLiveData.observe(viewLifecycleOwner) {
+            priceTimeSeries.clear()
+            timeList.clear()
             it.forEachIndexed { index, timeSeriesData ->
                 timeList.add(timeSeriesData.convertedTime)
                 priceTimeSeries.add(Entry(index.toFloat(), timeSeriesData.close!!.toFloat()))
@@ -128,6 +172,7 @@ class CoinDetailFragment : Fragment() {
     }
 
 
+
     private fun setLineChart() {
         val dataSet = LineDataSet(priceTimeSeries, "").apply {
             this.color = Color.WHITE
@@ -137,6 +182,7 @@ class CoinDetailFragment : Fragment() {
             this.setDrawFilled(true)
             this.fillDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.edit_text_bg)
             this.valueFormatter = XaxisFormatter()
+            this.setCircleColor(resources.getColor(R.color.light_yellow,requireActivity().theme))
 
         }
 
@@ -155,7 +201,7 @@ class CoinDetailFragment : Fragment() {
             invalidate()
             xAxis.valueFormatter = XaxisFormatter()
             xAxis.isAvoidFirstLastClippingEnabled
-            xAxis.mLabelHeight = 150
+            xAxis.mLabelHeight = 140
             xAxis.mLabelRotatedHeight = 200
             xAxis.labelRotationAngle = 90f
             xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -179,7 +225,7 @@ class CoinDetailFragment : Fragment() {
 
     inner class XaxisFormatter : ValueFormatter() {
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-            return timeList[value.toInt()]
+            return timeList[value.toInt()].split("/")[0].trim()
         }
 
         override fun getFormattedValue(value: Float): String {
@@ -224,7 +270,7 @@ class CoinDetailFragment : Fragment() {
             // Check marker position and update offsets.
             var posx = posx
             val w = width
-            if (uiScreenWidth - posx - w < w) {
+            if (5*uiScreenWidth/4 - posx - w < w) {
                 posx -= w.toFloat()
             }
 

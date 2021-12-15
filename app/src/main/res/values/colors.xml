@@ -21,4 +21,7 @@
     <color name="negative_red">#DC143C</color>
     <color name="subtitle_gray">#3A3B3C</color>
 
+    <!--- Coin Detail Screen -->
+    <color name="orange">#fb8500</color>
+
 </resources>

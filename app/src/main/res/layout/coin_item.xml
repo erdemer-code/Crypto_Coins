@@ -55,7 +55,7 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/subtitle_gray"
+                android:textColor="@color/orange"
                 android:text="@{coinData.name}"
                 app:layout_constraintLeft_toLeftOf="@+id/item_image"
                 app:layout_constraintTop_toBottomOf="@id/item_title" />
