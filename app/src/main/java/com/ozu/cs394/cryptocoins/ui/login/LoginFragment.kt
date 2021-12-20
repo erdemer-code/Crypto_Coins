@@ -19,8 +19,8 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
 
     companion object {
-        const val EMAIL = "test@ozu.edu.tr"
-        const val PASSWORD = "123456"
+        const val EMAIL = "t"
+        const val PASSWORD = ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
