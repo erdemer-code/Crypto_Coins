@@ -26,6 +26,13 @@
             android:exported="true"
             android:theme="@style/Theme.CryptoCoins"
             android:windowSoftInputMode="adjustResize" />
+        <service
+            android:name="com.ozu.cs394.cryptocoins.util.AppFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
