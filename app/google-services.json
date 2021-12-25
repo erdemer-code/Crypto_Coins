@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "603312697114",
+    "project_id": "cs534auth",
+    "storage_bucket": "cs534auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603312697114:android:41b134fdea3441fa2946a3",
+        "android_client_info": {
+          "package_name": "com.ozu.cs394.cryptocoins"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603312697114-5kt9mbvnv3kssma105gc0f5g704hmec7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1UMjLuiJRKmsJkbLbWVHzXDSvTtjDPVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603312697114-5kt9mbvnv3kssma105gc0f5g704hmec7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
