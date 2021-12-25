@@ -5,6 +5,7 @@
     android:background="@color/home_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    
     tools:context=".ui.activities.MainActivity">
 
 
@@ -30,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:visibility="invisible"
-       app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.appcompat.widget.Toolbar
@@ -39,13 +40,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/purple_bg"
-        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:title="@string/app_name"
         app:titleTextAppearance="@style/MontserratBoldTextAppearance"
         app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
