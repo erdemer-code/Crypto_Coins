@@ -12,6 +12,8 @@
     <color name="dark_yellow">#b98032</color>
     <color name="light_yellow">#ffc22b</color>
 
+    <color name="light_gray">#D3D3D3</color>
+
     <!-- Splash Screen -->
     <color name="splash_color_bg">#640eb1</color>
 

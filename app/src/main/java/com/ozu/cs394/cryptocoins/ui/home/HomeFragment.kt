@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -50,7 +53,6 @@ class HomeFragment : Fragment() {
 
         initObserver()
 
-
     }
 
     private fun initObserver() {
@@ -84,7 +86,15 @@ class HomeFragment : Fragment() {
         binding.recyclerViewHome.adapter = adapter
     }
 
-
+/*    private fun hideSystemBars() {
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(requireActivity().window.decorView) ?: return
+        // Configure the behavior of the hidden system bars
+        windowInsetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        // Hide both the status bar and the navigation bar
+//        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+    }*/
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

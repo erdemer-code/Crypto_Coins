@@ -14,7 +14,9 @@ import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.RegisterFragmentBinding
 import android.widget.CheckBox
 import android.widget.Toast
+import com.ozu.cs394.cryptocoins.ui.activities.MainActivity
 import com.ozu.cs394.cryptocoins.ui.dialogs.RegisterConfirmDialogFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
 
@@ -36,6 +38,7 @@ class RegisterFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this){
             findNavController().navigate(R.id.action_registerFragment_to_onBoardingFragment)
         }
+
     }
 
     override fun onCreateView(

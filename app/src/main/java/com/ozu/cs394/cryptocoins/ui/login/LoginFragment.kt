@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.LoginFragmentBinding
+import com.ozu.cs394.cryptocoins.ui.activities.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class LoginFragment : Fragment() {
     private var _binding: LoginFragmentBinding? = null
@@ -19,8 +21,8 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
 
     companion object {
-        const val EMAIL = "t"
-        const val PASSWORD = ""
+        const val EMAIL = "test@ozu.edu.tr"
+        const val PASSWORD = "123456"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class LoginFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(R.id.action_loginFragment_to_onBoardingFragment)
         }
+
     }
 
     override fun onCreateView(
@@ -41,8 +44,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         binding.btnLoginScreen.setOnClickListener {
             validateLogin()
         }
