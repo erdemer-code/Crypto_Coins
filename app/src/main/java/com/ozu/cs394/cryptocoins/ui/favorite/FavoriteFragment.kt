@@ -1,26 +1,59 @@
 package com.ozu.cs394.cryptocoins.ui.favorite
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ozu.cs394.cryptocoins.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ozu.cs394.cryptocoins.databinding.FavoriteFragmentBinding
+import com.ozu.cs394.cryptocoins.room.CoinsDAOImpl
+import com.ozu.cs394.cryptocoins.room.CoinsDatabase
+import com.ozu.cs394.cryptocoins.ui.adapter.FavoriteCoinAdapter
+import com.ozu.cs394.cryptocoins.ui.adapter.OnFavoriteCoinClickListener
+import com.ozu.cs394.cryptocoins.ui.home.HomeViewModel
+import kotlinx.coroutines.*
 
 class FavoriteFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = FavoriteFragment()
-    }
 
     private lateinit var viewModel: FavoriteViewModel
+    private var _binding: FavoriteFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.favorite_fragment, container, false)
+    ): View {
+        _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
+        return (binding.root)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
+        viewModel.getAllFavoriteCoins(requireContext())
+        dataObserver()
+    }
+
+    private fun dataObserver() {
+        viewModel.favoriteCoinsLiveData.observe(viewLifecycleOwner){
+            binding.rvFavoriteCoins.layoutManager = LinearLayoutManager(requireContext())
+            binding.rvFavoriteCoins.adapter = FavoriteCoinAdapter(it,object :OnFavoriteCoinClickListener{
+                override fun onClick(position: Int) {
+
+                }
+            })
+
+        }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 

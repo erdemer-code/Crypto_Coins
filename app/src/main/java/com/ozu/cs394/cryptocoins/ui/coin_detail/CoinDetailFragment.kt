@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.mikephil.charting.components.AxisBase
@@ -36,6 +38,9 @@ import com.ozu.cs394.cryptocoins.databinding.CoinDetailFragmentBinding
 import com.ozu.cs394.cryptocoins.extension.checkValuePositiveOrNegative
 import com.ozu.cs394.cryptocoins.extension.downloadFromUrl
 import com.ozu.cs394.cryptocoins.extension.putCorrectArrow
+import com.ozu.cs394.cryptocoins.room.CoinsDAOImpl
+import com.ozu.cs394.cryptocoins.room.CoinsDatabase
+import kotlinx.coroutines.launch
 
 
 class CoinDetailFragment : Fragment() {
@@ -47,6 +52,7 @@ class CoinDetailFragment : Fragment() {
     private val priceTimeSeries = mutableListOf<Entry>()
     val timeList = mutableListOf<String>()
     private var isFavorite = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -126,6 +132,23 @@ class CoinDetailFragment : Fragment() {
             tvCoinDetailChangeValue.checkValuePositiveOrNegative(args.coin?.day1?.formattedPriceChange!!)
             ivCoinDetailValueArrow.putCorrectArrow(args.coin?.day1?.formattedPriceChange!!)
         }
+        lifecycleScope.launch {
+            val db = CoinsDAOImpl(CoinsDatabase.getInstance(requireContext()))
+            val coin = args.coin?.id?.let { db.getCoin(it) }
+            if (coin?.isFavorite == true){
+                isFavorite = true
+                DrawableCompat.setTint(
+                    DrawableCompat.wrap(binding.ivFavoriteStar.drawable),
+                    ContextCompat.getColor(requireContext(), R.color.light_yellow)
+                )
+            } else {
+                isFavorite = false
+                DrawableCompat.setTint(
+                    DrawableCompat.wrap(binding.ivFavoriteStar.drawable),
+                    ContextCompat.getColor(requireContext(), R.color.white)
+                )
+            }
+        }
 
     }
 
@@ -155,7 +178,13 @@ class CoinDetailFragment : Fragment() {
                         DrawableCompat.wrap(binding.ivFavoriteStar.drawable),
                         ContextCompat.getColor(requireContext(), R.color.light_yellow)
                     )
-                    // TODO: Room operations
+                    lifecycleScope.launch {
+                        val db = CoinsDAOImpl(CoinsDatabase.getInstance(requireContext()))
+                        val coin = args.coin
+                        coin?.isFavorite = true
+                        db.makeFavoriteCoin(coin!!)
+                    }
+
                     Toast.makeText(requireContext(),"Coin was added to the Favorites",Toast.LENGTH_SHORT).show()
                 } else {
                     isFavorite = false
@@ -163,7 +192,10 @@ class CoinDetailFragment : Fragment() {
                         DrawableCompat.wrap(binding.ivFavoriteStar.drawable),
                         ContextCompat.getColor(requireContext(), R.color.white)
                     )
-                    // TODO: Room operations
+                    lifecycleScope.launch {
+                        val db = CoinsDAOImpl(CoinsDatabase.getInstance(requireContext()))
+                        args.coin?.let { coin-> db.deleteCoin(coin) }
+                    }
                     Toast.makeText(requireContext(),"Coin was removed from the Favorites",Toast.LENGTH_SHORT).show()
                 }
             }
@@ -283,4 +315,3 @@ class CoinDetailFragment : Fragment() {
 
     }
 }
-

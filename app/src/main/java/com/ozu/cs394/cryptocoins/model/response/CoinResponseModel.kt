@@ -3,6 +3,9 @@ package com.ozu.cs394.cryptocoins.model.response
 import android.os.Build
 import android.os.Parcelable
 import androidx.annotation.RequiresApi
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.time.LocalDate
@@ -10,23 +13,31 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Parcelize
+@Entity(tableName = "Coins")
 data class CoinResponseModel(
-    val id: String?,
+    @PrimaryKey
+    val id: String,
     val currency: String?,
     val symbol: String?,
     val name: String?,
     val logo_url: String?,
     val price: String?,
     val price_date: String?,
+    @Embedded
     @SerializedName("1d")
     val day1: IntervalModel?,
+/*    @Embedded
     @SerializedName("7d")
     val day7: IntervalModel?,
+    @Embedded
     @SerializedName("30")
     val day30: IntervalModel?,
+    @Embedded
     @SerializedName("365d")
     val day365: IntervalModel?,
-    val ytd: IntervalModel?
+    @Embedded
+    val ytd: IntervalModel?*/
+    var isFavorite: Boolean? = false
 
 ):Parcelable {
     val convertedPriceDate: String?
