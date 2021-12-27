@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.FavoriteFragmentBinding
 import com.ozu.cs394.cryptocoins.room.CoinsDAOImpl
 import com.ozu.cs394.cryptocoins.room.CoinsDatabase
@@ -43,7 +46,8 @@ class FavoriteFragment : Fragment() {
             binding.rvFavoriteCoins.layoutManager = LinearLayoutManager(requireContext())
             binding.rvFavoriteCoins.adapter = FavoriteCoinAdapter(it,object :OnFavoriteCoinClickListener{
                 override fun onClick(position: Int) {
-
+                    val bundle = bundleOf("coin" to it[position])
+                    findNavController().navigate(R.id.action_favoriteFragment_to_coinDetailFragment, bundle)
                 }
             })
 

@@ -10,7 +10,7 @@ import com.ozu.cs394.cryptocoins.model.response.CoinResponseModel
 
 class FavoriteCoinAdapter(
     private val favoriteCoins: List<CoinResponseModel>,
-    onFavoriteCoinClickListener: OnFavoriteCoinClickListener
+    private val onFavoriteCoinClickListener: OnFavoriteCoinClickListener
 ) : RecyclerView.Adapter<FavoriteCoinAdapter.FavoriteCoinsViewHolder>() {
 
      class FavoriteCoinsViewHolder private constructor(val binding: CoinItemBinding ): RecyclerView.ViewHolder(binding.root){
@@ -27,6 +27,9 @@ class FavoriteCoinAdapter(
 
     override fun onBindViewHolder(holder: FavoriteCoinsViewHolder, position: Int) {
         holder.binding.coinData = favoriteCoins[position]
+        holder.itemView.setOnClickListener {
+            onFavoriteCoinClickListener.onClick(position)
+        }
     }
 
     override fun getItemCount(): Int = favoriteCoins.size

@@ -71,5 +71,9 @@
         android:id="@+id/favoriteFragment"
         android:name="com.ozu.cs394.cryptocoins.ui.favorite.FavoriteFragment"
         android:label="favorite_fragment"
-        tools:layout="@layout/favorite_fragment" />
+        tools:layout="@layout/favorite_fragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment" />
+    </fragment>
 </navigation>

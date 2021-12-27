@@ -76,13 +76,13 @@
             android:id="@+id/tvCoinDetailPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/tvCoinDetailName"
+            app:layout_constraintStart_toEndOf="@id/tvCoinDetailSymbol"
             app:layout_constraintTop_toTopOf="@id/tvCoinDetailSymbol"
             tools:text="$40.000"
             android:textColor="@color/white"
             android:fontFamily="@font/montserrat_bold"
             android:textSize="20sp"
-            android:layout_marginStart="12dp"/>
+            android:layout_marginStart="15dp"/>
 
         <TextView
             android:id="@+id/tvCoinDetailChangeValue"
@@ -153,8 +153,6 @@
         </RadioGroup>
 
 
-
-
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
             android:layout_width="0dp"
@@ -166,8 +164,10 @@
             android:paddingEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
