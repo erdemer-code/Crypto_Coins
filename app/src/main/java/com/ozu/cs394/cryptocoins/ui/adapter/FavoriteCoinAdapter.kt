@@ -9,9 +9,8 @@ import com.ozu.cs394.cryptocoins.databinding.CoinItemBinding
 import com.ozu.cs394.cryptocoins.model.response.CoinResponseModel
 
 class FavoriteCoinAdapter(
-    private val favoriteCoins: List<CoinResponseModel>,
     private val onFavoriteCoinClickListener: OnFavoriteCoinClickListener
-) : RecyclerView.Adapter<FavoriteCoinAdapter.FavoriteCoinsViewHolder>() {
+) : ListAdapter<CoinResponseModel,FavoriteCoinAdapter.FavoriteCoinsViewHolder>(DiffCallback()) {
 
      class FavoriteCoinsViewHolder private constructor(val binding: CoinItemBinding ): RecyclerView.ViewHolder(binding.root){
         companion object {
@@ -21,31 +20,30 @@ class FavoriteCoinAdapter(
                 return FavoriteCoinsViewHolder(binding)
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteCoinsViewHolder = FavoriteCoinsViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: FavoriteCoinsViewHolder, position: Int) {
-        holder.binding.coinData = favoriteCoins[position]
+        holder.binding.coinData = getItem(position)
         holder.itemView.setOnClickListener {
             onFavoriteCoinClickListener.onClick(position)
         }
     }
 
-    override fun getItemCount(): Int = favoriteCoins.size
 }
 
-class DiffCallback: DiffUtil.ItemCallback<CoinResponseModel>() {
-    override fun areItemsTheSame(oldItem: CoinResponseModel, newItem: CoinResponseModel): Boolean {
-        return oldItem == newItem
-    }
+
+class DiffCallback: DiffUtil.ItemCallback<CoinResponseModel>(){
+    override fun areItemsTheSame(oldItem: CoinResponseModel, newItem: CoinResponseModel): Boolean =
+        oldItem.name == newItem.name
 
     override fun areContentsTheSame(
         oldItem: CoinResponseModel,
         newItem: CoinResponseModel
-    ): Boolean {
-        return oldItem == newItem
-    }
+    ): Boolean = oldItem == newItem
+
 }
 
 interface OnFavoriteCoinClickListener {

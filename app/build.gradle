@@ -120,4 +120,7 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:1.1.1"
     kapt "androidx.room:room-compiler:2.4.0"
     implementation "androidx.room:room-ktx:2.4.0"
+
+    //RecyclerView Swipe Decorator
+    implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.3'
 }
