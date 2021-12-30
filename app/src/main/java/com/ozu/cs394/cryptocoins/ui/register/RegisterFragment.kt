@@ -14,7 +14,12 @@ import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.RegisterFragmentBinding
 import android.widget.CheckBox
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.ozu.cs394.cryptocoins.ui.activities.MainActivity
 import com.ozu.cs394.cryptocoins.ui.dialogs.RegisterConfirmDialogFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
 
@@ -24,6 +29,7 @@ class RegisterFragment : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var viewModel: RegisterViewModel
+    private lateinit var auth: FirebaseAuth
 
     private var checkBoxTicked: Boolean? = false
 
@@ -36,6 +42,9 @@ class RegisterFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this){
             findNavController().navigate(R.id.action_registerFragment_to_onBoardingFragment)
         }
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
     }
 
     override fun onCreateView(

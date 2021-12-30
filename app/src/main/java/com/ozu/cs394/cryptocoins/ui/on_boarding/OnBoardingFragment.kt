@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.FragmentOnBoardingBinding
+import com.ozu.cs394.cryptocoins.ui.activities.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class OnBoardingFragment : Fragment() {
@@ -30,6 +32,11 @@ class OnBoardingFragment : Fragment() {
             }
         }
         return (binding.root)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onDestroy() {

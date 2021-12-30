@@ -1,27 +1,24 @@
 package com.ozu.cs394.cryptocoins.network
 
 import com.ozu.cs394.cryptocoins.BuildConfig
-import com.ozu.cs394.cryptocoins.network.service.CurrentCoinsPriceService
+import com.ozu.cs394.cryptocoins.network.service.CoinsDetailService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class NetworkHelper {
-
-    var currentCoinsPriceService: CurrentCoinsPriceService? = null
+class DetailPageNetworkHelper {
+    var coinsDetailService:CoinsDetailService? = null
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.API_URL)
+            .baseUrl(BuildConfig.LUNARCRUSH_API_URL)
             .client(getClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // TODO: Add related network services here!
-
-        currentCoinsPriceService = retrofit.create(CurrentCoinsPriceService::class.java)
+        coinsDetailService = retrofit.create(CoinsDetailService::class.java)
     }
 
     private fun getClient(): OkHttpClient {
@@ -41,5 +38,4 @@ class NetworkHelper {
         return httpLoginInterceptor
 
     }
-
 }

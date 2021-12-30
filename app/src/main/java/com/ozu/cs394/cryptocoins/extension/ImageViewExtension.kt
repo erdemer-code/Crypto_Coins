@@ -22,3 +22,11 @@ fun ImageView.downloadFromUrl(coinUrl:String?){
 
     imageLoader.enqueue(request)
 }
+
+fun ImageView.putCorrectArrow(value:String){
+    if (value.replace(",",".").toDouble() > 0){
+        this.setImageResource(R.drawable.ic_baseline_arrow_upward_24)
+    } else {
+        this.setImageResource(R.drawable.ic_baseline_arrow_downward_24)
+    }
+}

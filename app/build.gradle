@@ -3,8 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-}
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 
+}
 android {
     compileSdk 31
 
@@ -20,14 +23,18 @@ android {
 
     buildTypes{
         debug {
-            buildConfigField "String", "API_URL", "\"https://api.nomics.com/v1/\""
-            buildConfigField "String", "API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "NOMICS_API_URL", "\"https://api.nomics.com/v1/\""
+            buildConfigField "String", "NOMICS_API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "LUNARCRUSH_API_URL", "\"https://api.lunarcrush.com/\""
+            buildConfigField "String", "LUNARCRUSH_API_KEY", "\"v4br0b7o4f7ff3r83l8gs\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_URL", "\"https://api.nomics.com/v1/\""
-            buildConfigField "String", "API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "NOMICS_API_URL", "\"https://api.nomics.com/v1/\""
+            buildConfigField "String", "NOMICS_API_KEY", "\"d8fc5da8b35397ecd92581e6bfdf59f3b79de8d6\""
+            buildConfigField "String", "LUNARCRUSH_API_URL", "\"https://api.lunarcrush.com/v2/\""
+            buildConfigField "String", "LUNARCRUSH_API_KEY", "\"v4br0b7o4f7ff3r83l8gs\""
         }
     }
     compileOptions {
@@ -43,17 +50,19 @@ android {
     }
 }
 
-
+def lottieVersion = "4.2.2"
+def room_version = "2.4.0"
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -65,7 +74,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     implementation "androidx.lifecycle:lifecycle-process:2.4.0"
 
     // Live Data
@@ -85,4 +94,33 @@ dependencies {
     //Coil
     implementation("io.coil-kt:coil:1.2.0")
     implementation("io.coil-kt:coil-svg:1.2.0")
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //MP Android Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
+    //FireBase
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation platform('com.google.firebase:firebase-bom:29.0.2')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //FCM
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+
+    //Work Manager
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
+    // Room
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-runtime:2.4.0"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "androidx.room:room-compiler:2.4.0"
+    implementation "androidx.room:room-ktx:2.4.0"
+
+    //RecyclerView Swipe Decorator
+    implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.3'
 }
