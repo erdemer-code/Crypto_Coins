@@ -5,9 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,12 +16,14 @@ import com.ozu.cs394.cryptocoins.databinding.HomeFragmentBinding
 import com.ozu.cs394.cryptocoins.model.response.CoinResponseModel
 import com.ozu.cs394.cryptocoins.ui.adapter.CoinsAdapter
 import com.ozu.cs394.cryptocoins.ui.adapter.OnCoinClickListener
+import com.ozu.cs394.cryptocoins.util.SharedPreferenceManager
 
 class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
+    private val spManager = SharedPreferenceManager
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<CoinsAdapter.CoinsViewHolder>? = null
@@ -42,15 +41,31 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
+        spManager.putData(true, "SAVED")
+
         viewModel.getCurrentCoinsPrice(
             BuildConfig.NOMICS_API_KEY,
             listOf<String>(
                 "BTC", "ETH", "BNB", "SOL", "ADA", "XRP", "AVAX",
                 "DOGE", "LTC", "MATIC", "XLM", "EGLD", "TRX", "FTM",
-                "MANA", "FIL", "ATOM", "ALGO", "XTZ", "UNI", "LINK"
+                "MANA", "FIL", "ATOM", "ALGO", "XTZ", "UNI", "LINK",
+                "DAI", "VET", "ICP", "XMR", "XTZ", "KLAY", "AAVE",
+                "EOS", "LRC", "QNT", "MKR", "NEO", "HEX", "USDT",
+                "LUNA", "CRO", "NEAR"
+
             ), "USD"
         )
 
+        binding.toolbar.inflateMenu(R.menu.toolbar_menu)
+        binding.toolbar.setOnMenuItemClickListener { p0 ->
+            when (p0?.itemId) {
+                R.id.item_exit -> {
+                    spManager.removeSharedPreferences()
+                    requireActivity().finishAffinity()
+                }
+            }
+            false
+        }
         initObserver()
 
     }
