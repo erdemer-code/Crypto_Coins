@@ -59,7 +59,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
         binding.apply {
             textView2.movementMethod = LinkMovementMethod.getInstance();
             checkBox.setOnClickListener(View.OnClickListener {
