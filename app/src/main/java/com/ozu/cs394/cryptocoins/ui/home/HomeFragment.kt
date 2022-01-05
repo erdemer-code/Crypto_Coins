@@ -27,7 +27,13 @@ class HomeFragment : Fragment() {
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<CoinsAdapter.CoinsViewHolder>? = null
+    private var isFetched: Boolean? = null
+    private val coinsListForRV = mutableListOf<CoinResponseModel>()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,21 +46,24 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-
         spManager.putData(true, "SAVED")
 
-        viewModel.getCurrentCoinsPrice(
-            BuildConfig.NOMICS_API_KEY,
-            listOf<String>(
-                "BTC", "ETH", "BNB", "SOL", "ADA", "XRP", "AVAX",
-                "DOGE", "LTC", "MATIC", "XLM", "EGLD", "TRX", "FTM",
-                "MANA", "FIL", "ATOM", "ALGO", "XTZ", "UNI", "LINK",
-                "DAI", "VET", "ICP", "XMR", "XTZ", "KLAY", "AAVE",
-                "EOS", "LRC", "QNT", "MKR", "NEO", "HEX", "USDT",
-                "LUNA", "CRO", "NEAR"
+        if (isFetched == null) {
+            viewModel.getCurrentCoinsPrice(
+                BuildConfig.NOMICS_API_KEY,
+                listOf<String>(
+                    "BTC", "ETH", "BNB", "SOL", "ADA", "XRP", "AVAX",
+                    "DOGE", "LTC", "MATIC", "XLM", "EGLD", "TRX", "FTM",
+                    "MANA", "FIL", "ATOM", "ALGO", "XTZ", "UNI", "LINK",
+                    "DAI", "VET", "ICP", "XMR", "XTZ", "USDC", "AAVE",
+                    "EOS", "LRC", "QNT", "MKR", "NEO", "HEX", "USDT",
+                    "LUNA", "CRO", "NEAR", "BUSD", "HBAR", "ETC", "GRT"
 
-            ), "USD"
-        )
+                ), "USD"
+            )
+        } else {
+            setRVAdapter(coinsListForRV)
+        }
 
         binding.toolbar.inflateMenu(R.menu.toolbar_menu)
         binding.toolbar.setOnMenuItemClickListener { p0 ->
@@ -70,13 +79,14 @@ class HomeFragment : Fragment() {
 
     }
 
+
     private fun initObserver() {
-        val coinsListForRV = mutableListOf<CoinResponseModel>()
+        coinsListForRV.clear()
         viewModel.currentCoinsPriceLiveData.observe(viewLifecycleOwner) {
             it.forEach { coinResponse ->
                 coinsListForRV.add(coinResponse)
             }
-
+            isFetched = true
             setRVAdapter(coinsListForRV)
         }
         viewModel.homeLoadingLiveData.observe(viewLifecycleOwner) {
