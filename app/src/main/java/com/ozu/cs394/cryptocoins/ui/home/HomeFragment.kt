@@ -124,6 +124,7 @@ class HomeFragment : Fragment() {
 
         })
         binding.recyclerViewHome.adapter = adapter
+
     }
 
 

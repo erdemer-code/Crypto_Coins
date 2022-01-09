@@ -26,7 +26,7 @@
         android:id="@+id/recyclerViewHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="25dp"
+        android:paddingTop="50dp"
         android:paddingBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -63,7 +63,6 @@
         android:queryHint="Search"
         app:iconifiedByDefault="false"
         android:background="@drawable/light_yellow_btn_bg"
-        app:layout_constraintBottom_toTopOf="@id/recyclerViewHome"
          />
 
 

@@ -32,8 +32,8 @@ class CoinsAdapter(private val coinsList: MutableList<CoinResponseModel>,
 
     }
 
-    override fun getFilter(): Filter =
-        object: Filter() {
+    override fun getFilter(): Filter = searchFilter
+        private val searchFilter = object:Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filteredList = mutableListOf<CoinResponseModel>()
                 if (constraint == null || constraint.isEmpty())
