@@ -62,8 +62,7 @@
         android:focusable="true"
         android:queryHint="Search"
         app:iconifiedByDefault="false"
-        android:background="@drawable/light_yellow_btn_bg"
-         />
+        android:background="@drawable/light_yellow_btn_bg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

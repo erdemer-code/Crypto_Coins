@@ -2,11 +2,11 @@ package com.ozu.cs394.cryptocoins.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.databinding.adapters.SearchViewBindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,17 +19,16 @@ import com.ozu.cs394.cryptocoins.model.response.CoinResponseModel
 import com.ozu.cs394.cryptocoins.ui.adapter.CoinsAdapter
 import com.ozu.cs394.cryptocoins.ui.adapter.OnCoinClickListener
 import com.ozu.cs394.cryptocoins.util.SharedPreferenceManager
-import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
 
+    private lateinit var adapter: CoinsAdapter
     private lateinit var viewModel: HomeViewModel
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
     private val spManager = SharedPreferenceManager
 
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<CoinsAdapter.CoinsViewHolder>? = null
     private var isFetched: Boolean? = null
     private val coinsListForRV = mutableListOf<CoinResponseModel>()
 
@@ -68,6 +67,8 @@ class HomeFragment : Fragment() {
             setRVAdapter(coinsListForRV)
         }
 
+
+
         binding.toolbar.inflateMenu(R.menu.toolbar_menu)
         binding.toolbar.setOnMenuItemClickListener { p0 ->
             when (p0?.itemId) {
@@ -78,14 +79,13 @@ class HomeFragment : Fragment() {
             }
             false
         }
-        binding.homeSearchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+        binding.homeSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.e("submit",query.toString())
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.e("submit",newText.toString())
+                adapter.filter.filter(newText)
                 return false
             }
 
@@ -121,7 +121,6 @@ class HomeFragment : Fragment() {
                 val bundle = bundleOf("coin" to coinList[position])
                 findNavController().navigate(R.id.action_homeFragment_to_coinDetailFragment, bundle)
             }
-
         })
         binding.recyclerViewHome.adapter = adapter
 

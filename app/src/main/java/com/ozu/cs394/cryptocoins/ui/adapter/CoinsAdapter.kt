@@ -13,7 +13,11 @@ import com.ozu.cs394.cryptocoins.model.response.CoinResponseModel
 class CoinsAdapter(private val coinsList: MutableList<CoinResponseModel>,
                    private val onCoinClickListener:OnCoinClickListener?) : RecyclerView.Adapter<CoinsAdapter.CoinsViewHolder>() , Filterable{
 
-    private var coinListFull = coinsList;
+    private val coinListFull = mutableListOf<CoinResponseModel>()
+
+    init {
+        coinListFull.addAll(coinsList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinsAdapter.CoinsViewHolder =
         CoinsViewHolder(DataBindingUtil.inflate<CoinItemBinding>(LayoutInflater.from(parent.context),R.layout.coin_item,parent,false))
@@ -35,6 +39,7 @@ class CoinsAdapter(private val coinsList: MutableList<CoinResponseModel>,
     override fun getFilter(): Filter = searchFilter
         private val searchFilter = object:Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+
                 val filteredList = mutableListOf<CoinResponseModel>()
                 if (constraint == null || constraint.isEmpty())
                     filteredList.addAll(coinListFull)
