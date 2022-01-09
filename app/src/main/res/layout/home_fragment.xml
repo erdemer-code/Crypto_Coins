@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/homeSearchView"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <androidx.appcompat.widget.Toolbar
@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/homeSearchView"
         android:backgroundTint="@color/purple_bg"
         android:background="?attr/colorPrimary"
         android:layout_height="wrap_content"
@@ -49,8 +50,21 @@
         app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:id="@+id/homeSearchView"
+        android:clickable="true"
+        android:gravity="center"
+        android:focusable="true"
+        android:queryHint="Search"
+        app:iconifiedByDefault="false"
+        android:background="@drawable/light_yellow_btn_bg"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewHome"
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
