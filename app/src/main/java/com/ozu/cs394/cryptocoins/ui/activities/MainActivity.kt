@@ -1,18 +1,17 @@
 package com.ozu.cs394.cryptocoins.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ozu.cs394.cryptocoins.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.ozu.cs394.cryptocoins.util.SharedPreferenceManager
 
 class MainActivity : AppCompatActivity() {
+    private val spManager = SharedPreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +35,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        if (spManager.getData<Boolean>("SAVED") == true)
+            navController.navigate(R.id.action_onBoardingFragment_to_homeFragment)
+
     }
+
 
 
 }

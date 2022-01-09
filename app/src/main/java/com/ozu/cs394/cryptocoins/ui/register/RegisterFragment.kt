@@ -45,6 +45,8 @@ class RegisterFragment : Fragment() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+
+
     }
 
     override fun onCreateView(
@@ -57,7 +59,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
         binding.apply {
             textView2.movementMethod = LinkMovementMethod.getInstance();
             checkBox.setOnClickListener(View.OnClickListener {
@@ -71,12 +73,26 @@ class RegisterFragment : Fragment() {
                 validateRegister()
             }
         }
+
+    }
+
+    private fun createAccount(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener() { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    RegisterConfirmDialogFragment().show(childFragmentManager, RegisterConfirmDialogFragment.TAG)
+                } else {
+                    Toast.makeText(requireContext(), "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     private fun validateRegister() {
         if (checkBoxTicked == true && binding.etPasswordRegister.text.toString().equals(binding.etPasswordRegisterConfirm.text.toString()) && binding.etPasswordRegister.text.toString() != "" && binding.etPasswordRegisterConfirm.text.toString() != ""){
             USERNAME = binding.etUsername.text.toString()
-            RegisterConfirmDialogFragment().show(childFragmentManager, RegisterConfirmDialogFragment.TAG)
+            createAccount(binding.etRegisterEmail.text.toString(),binding.etPasswordRegister.text.toString())
         }
         else if (checkBoxTicked == false)
             Toast.makeText(requireContext(),"Please confirm the user agreement.",Toast.LENGTH_SHORT).show()

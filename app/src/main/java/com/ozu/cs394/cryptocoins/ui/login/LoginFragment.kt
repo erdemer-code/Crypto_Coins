@@ -9,6 +9,9 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ozu.cs394.cryptocoins.R
 import com.ozu.cs394.cryptocoins.databinding.LoginFragmentBinding
 import com.ozu.cs394.cryptocoins.ui.activities.MainActivity
@@ -19,15 +22,13 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: LoginViewModel
+    private lateinit var auth: FirebaseAuth
 
-    companion object {
-        const val EMAIL = "test@ozu.edu.tr"
-        const val PASSWORD = "123456"
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        auth = Firebase.auth
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigate(R.id.action_loginFragment_to_onBoardingFragment)
         }
@@ -46,7 +47,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         binding.btnLoginScreen.setOnClickListener {
-            validateLogin()
+            validateLogin(binding.etEmail.text.toString(),binding.etPassword.text.toString())
         }
         binding.twCreateAccount.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -54,14 +55,24 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun validateLogin() {
-        if(binding.etEmail.text.toString() == EMAIL && binding.etPassword.text.toString() == PASSWORD) {
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-        } else {
+    private fun validateLogin(email: String,password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener() { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                } else {
 
-            Toast.makeText(requireContext(),"Your email address or password is incorrect.",Toast.LENGTH_SHORT).show()
-            binding.etPassword.setText("")
-        }
+                    Toast.makeText(requireContext(), "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+
+                }
+            }
+    }
+
+    private fun checkFirebase(email:String,password:String) {
+
+
     }
 
     override fun onDestroy() {

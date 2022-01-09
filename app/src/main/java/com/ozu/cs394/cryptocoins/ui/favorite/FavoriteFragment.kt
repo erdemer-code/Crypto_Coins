@@ -62,7 +62,7 @@ class FavoriteFragment : Fragment() {
             })
             adapter.submitList(list)
             binding.rvFavoriteCoins.adapter = adapter
-            var clickedYes = false
+
 
             val itemTouchHelperCallback =
                 object :
@@ -74,20 +74,15 @@ class FavoriteFragment : Fragment() {
                     ): Boolean = false
 
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        var clickedUndo = false
                         Snackbar.make(
                             requireView(),
                             "Do you want to delete this coin from your favorites",
                             Snackbar.LENGTH_SHORT
                         )
-                            .setAction("Yes") {
-                                clickedYes = true
-                                lifecycleScope.launch {
-                                    val db =
-                                        CoinsDAOImpl(CoinsDatabase.getInstance(requireContext()))
-                                    db.deleteCoin(list[viewHolder.absoluteAdapterPosition])
-                                    Log.e("AllList",db.getAllFavoriteCoins().toString())
-                                    adapter.submitList(db.getAllFavoriteCoins())
-                                }
+                            .setAction("UNDO") {
+                                clickedUndo = true
+                                adapter.notifyItemChanged(viewHolder.absoluteAdapterPosition)
                             }
                             .addCallback(object : Snackbar.Callback() {
                                 override fun onDismissed(
@@ -95,8 +90,15 @@ class FavoriteFragment : Fragment() {
                                     event: Int
                                 ) {
                                     super.onDismissed(transientBottomBar, event)
-                                    if (!clickedYes)
-                                        adapter.notifyItemChanged(viewHolder.absoluteAdapterPosition)
+                                    if (!clickedUndo) {
+                                        lifecycleScope.launch {
+                                            val db =
+                                                CoinsDAOImpl(CoinsDatabase.getInstance(requireContext()))
+                                            db.deleteCoin(list[viewHolder.absoluteAdapterPosition])
+                                            Log.e("AllList",db.getAllFavoriteCoins().toString())
+                                            adapter.submitList(db.getAllFavoriteCoins())
+                                        }
+                                    }
 
                                 }
                             }
